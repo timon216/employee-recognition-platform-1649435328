@@ -1,8 +1,8 @@
 <h1>Kudos</h1>
 
-<table>
+<table class="table table-light table-striped table-hover">
   <thead>
-    <tr>
+    <tr class="table-dark">
       <th>Title</th>
       <th>Content</th>
       <th>Giver</th>
@@ -13,19 +13,17 @@
 
   <tbody>
     <% @kudos.each do |kudo| %>
-      <tr>
+      <tr class="align-middle">
         <td><%= kudo.title %></td>
         <td><%= kudo.content %></td>
         <td><%= kudo.giver.email %></td>
         <td><%= kudo.receiver.email %></td>
         <td><%= link_to 'Show', kudo %></td>
-        <td><%= link_to 'Edit', edit_kudo_path(kudo) %></td>
-        <td><%= link_to 'Destroy', kudo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_kudo_path(kudo), class:"btn btn-outline-primary btn-sm" %></td>
+        <td><%= link_to 'Delete', kudo, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger btn-sm" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Kudo', new_kudo_path %>
+<%= link_to 'New Kudo', new_kudo_path, class:"btn btn-outline-dark" %>
