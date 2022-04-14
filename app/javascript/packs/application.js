@@ -8,3 +8,14 @@ import * as ActiveStorage from "@rails/activestorage"
 
 Rails.start()
 ActiveStorage.start()
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const rows = document.querySelectorAll("tr[data-href]");
+
+    rows.forEach(row => {
+        row.addEventListener("click", () => {
+            window.location.href = row.dataset.href;
+        })
+    })
+})

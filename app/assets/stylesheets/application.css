@@ -19,6 +19,6 @@
     border-spacing: 0 0.8rem;
  }
 
- .red {
-    background-color: red;
- }
+tr[data-href] {
+   cursor: pointer;
+}
