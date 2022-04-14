@@ -13,13 +13,13 @@
 
   <tbody>
     <% @kudos.each do |kudo| %>
-      <tr data-href="<%= kudo_path(kudo) %>">
+      <tr data-href="<%= kudo_path(kudo) %>" class="align-middle">
         <td><%= kudo.title %></td>
         <td><%= kudo.content %></td>
         <td><%= kudo.giver.email %></td>
         <td><%= kudo.receiver.email %></td>
-        <td><%= link_to 'Edit', edit_kudo_path(kudo), class:"btn btn-outline-primary btn-sm" %></td>
-        <td><%= link_to 'Delete', kudo, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger btn-sm" %></td>
+        <td><%= link_to 'Edit', edit_kudo_path(kudo), class:"btn btn-outline-primary" %></td>
+        <td><%= link_to 'Delete', kudo, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger" %></td>
       </tr>
     <% end %>
   </tbody>
