@@ -1,5 +1,6 @@
 class KudosController < ApplicationController
   before_action :set_kudo, only: %i[show edit update destroy]
+  before_action :correct_employee, only: [:edit, :update, :destroy]
 
   # GET /kudos
   def index
@@ -11,7 +12,8 @@ class KudosController < ApplicationController
 
   # GET /kudos/new
   def new
-    @kudo = Kudo.new
+    # @kudo = Kudo.new
+    @kudo = current_employee.kudos.build
   end
 
   # GET /kudos/1/edit
@@ -19,7 +21,9 @@ class KudosController < ApplicationController
 
   # POST /kudos
   def create
-    @kudo = Kudo.new(kudo_params)
+    # @kudo = Kudo.new(kudo_params)
+    @kudo = current_employee.kudos.build(kudo_params)
+
     @kudo.giver = current_employee
 
     if @kudo.save
@@ -42,6 +46,11 @@ class KudosController < ApplicationController
   def destroy
     @kudo.destroy
     redirect_to kudos_url, notice: 'Kudo was successfully destroyed.'
+  end
+
+  def correct_employee
+    @kudo = current_employee.kudos.find_by(id: params[:id])
+    redirect_to kudos_path, notice: "Not Authorized to Edit This Kudo" if @kudo.nil?
   end
 
   private
