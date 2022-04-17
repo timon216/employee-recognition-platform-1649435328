@@ -1,6 +1,6 @@
 class KudosController < ApplicationController
   before_action :set_kudo, only: %i[show edit update destroy]
-  before_action :correct_employee, only: [:edit, :update, :destroy]
+  before_action :correct_employee, only: %i[edit update destroy]
 
   # GET /kudos
   def index
@@ -50,7 +50,7 @@ class KudosController < ApplicationController
 
   def correct_employee
     @kudo = current_employee.kudos.find_by(id: params[:id])
-    redirect_to kudos_path, notice: "Not Authorized to Edit This Kudo" if @kudo.nil?
+    redirect_to kudos_path, notice: 'Not Authorized to Edit This Kudo' if @kudo.nil?
   end
 
   private
