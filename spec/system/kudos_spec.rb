@@ -8,6 +8,7 @@ RSpec.describe 'Kudos', type: :system do
   context 'when I create the kudo' do
     before do
       create(:employee, email: 'employee@test.com', password: 'password')
+      create(:employee, email: 'newemployee@test.com', password: 'password')
       visit new_employee_session_path
       within('form') do
         fill_in 'Email', with: 'employee@test.com'
@@ -49,6 +50,7 @@ RSpec.describe 'Kudos', type: :system do
   context 'when I edit the kudo' do
     before do
       create(:employee, email: 'employee@test.com', password: 'password')
+      create(:employee, email: 'newemployee@test.com', password: 'password')
       visit new_employee_session_path
       within('form') do
         fill_in 'Email', with: 'employee@test.com'
@@ -95,6 +97,7 @@ RSpec.describe 'Kudos', type: :system do
   context 'when I delete the kudo' do
     it 'is succesful' do
       create(:employee, email: 'employee@test.com', password: 'password')
+      create(:employee, email: 'newemployee@test.com', password: 'password')
       visit new_employee_session_path
       within('form') do
         fill_in 'Email', with: 'employee@test.com'
