@@ -11,5 +11,5 @@
 end
 
 1.upto(4) do |t|
-    Kudo.create!(title: "from console", content: "kudo#{t}", giver: Employee.find_by(email: "employee#{t}@test.com"), receiver: Employee.find_by(email: "employee#{t+1}@test.com"))
+    Kudo.create!(title: "title", content: "very nice kudo #{t}", giver: Employee.find_by(email: "employee#{t}@test.com"), receiver: Employee.find_by(email: "employee#{t+1}@test.com"))
 end
