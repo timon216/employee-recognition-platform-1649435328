@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :kudo do
-    title { "Title" }
-    content { "Content" }
+    title { 'Title' }
+    content { 'Content' }
     giver
     receiver
   end
