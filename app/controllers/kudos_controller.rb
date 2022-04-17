@@ -1,5 +1,6 @@
 class KudosController < ApplicationController
   before_action :set_kudo, only: %i[show edit update destroy]
+  before_action :authenticate_employee!
   before_action :correct_employee, only: %i[edit update destroy]
 
   # GET /kudos
@@ -13,7 +14,7 @@ class KudosController < ApplicationController
   # GET /kudos/new
   def new
     # @kudo = Kudo.new
-    @kudo = current_employee.kudos.build
+    @kudo = current_employee.given_kudos.build
   end
 
   # GET /kudos/1/edit
@@ -22,7 +23,7 @@ class KudosController < ApplicationController
   # POST /kudos
   def create
     # @kudo = Kudo.new(kudo_params)
-    @kudo = current_employee.kudos.build(kudo_params)
+    @kudo = current_employee.given_kudos.build(kudo_params)
 
     @kudo.giver = current_employee
 
@@ -49,7 +50,7 @@ class KudosController < ApplicationController
   end
 
   def correct_employee
-    @kudo = current_employee.kudos.find_by(id: params[:id])
+    @kudo = current_employee.given_kudos.find_by(id: params[:id])
     redirect_to kudos_path, notice: 'Not Authorized to Edit This Kudo' if @kudo.nil?
   end
 
