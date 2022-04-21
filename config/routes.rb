@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'admin/pages/dashboard', to: 'admin_users/pages#dashboard'
+  
+  namespace :admin_users do
+    root to: 'pages#dashboard'
+  end
+
   devise_for :admin_users, path: "admin", controllers: {
     sessions: "admin_users/sessions"
   }
@@ -9,7 +15,5 @@ Rails.application.routes.draw do
   }
   resources :kudos
   
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-
-  root to: "kudos#index"
+  root to: "kudos#index"  
 end
