@@ -1,4 +1,5 @@
-class AdminUsers::PagesController < ApplicationController
-  def dashboard
+module AdminUsers
+  class PagesController < ApplicationController
+    def dashboard; end
   end
 end
