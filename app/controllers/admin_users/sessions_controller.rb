@@ -3,7 +3,8 @@
 module AdminUsers
   class SessionsController < Devise::SessionsController
     include Accessible
-    skip_before_action :check_user, only: :destroy
+
+    skip_before_action :check_user, only: :destroy # rubocop:disable Rails/LexicallyScopedActionFilter
 
     # before_action :configure_sign_in_params, only: [:create]
 

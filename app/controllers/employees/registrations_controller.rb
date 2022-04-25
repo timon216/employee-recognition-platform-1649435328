@@ -3,8 +3,8 @@
 module Employees
   class RegistrationsController < Devise::RegistrationsController
     include Accessible
-    # skip_before_action :check_user, except: [:new, :create]
-    skip_before_action :check_user, only: %i[edit update destroy cancel]
+
+    skip_before_action :check_user, except: %i[new create] # rubocop:disable Rails/LexicallyScopedActionFilter
 
     # before_action :configure_sign_up_params, only: [:create]
     # before_action :configure_account_update_params, only: [:update]
