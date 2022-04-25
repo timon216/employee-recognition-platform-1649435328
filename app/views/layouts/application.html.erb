@@ -18,7 +18,13 @@
   </head>
   <body>
 
-    <%= render 'home/header' %>
+    <% if admin_user_signed_in? %>
+      <%= render 'home/header-admin_user' %>
+    <% elsif employee_signed_in? %>
+    <%= render 'home/header-employee' %>
+    <% else %>
+      <%= render 'home/header' %>
+    <% end %>
 
     <div class="container">
       <% if notice %>
