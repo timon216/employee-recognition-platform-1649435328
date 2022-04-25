@@ -13,3 +13,7 @@ end
 1.upto(4) do |t|
     Kudo.create!(title: "title", content: "very nice kudo #{t}", giver: Employee.find_by(email: "employee#{t}@test.com"), receiver: Employee.find_by(email: "employee#{t+1}@test.com"))
 end
+
+1.upto(2) do |t|
+    AdminUser.create!(email: "admin#{t}@test.com", password: "qwerty")
+end
