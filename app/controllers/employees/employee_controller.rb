@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Employees
-    class EmployeeController < ApplicationController
-        before_action :authenticate_employee!
+  class EmployeeController < ApplicationController
+    before_action :authenticate_employee!
 
-        layout 'employee'
-    end
+    layout 'employee'
+  end
 end
