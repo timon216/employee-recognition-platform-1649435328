@@ -7,7 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 1.upto(5) do |t|
-    Employee.create!(email: "employee#{t}@test.com", password: "password")
+    # Employee.create!(email: "employee#{t}@test.com", password: "password")
+    Employee.where(email: "employee#{t}@test.com").first_or_create!(password: "password")
 end
 
 1.upto(4) do |t|
@@ -15,5 +16,6 @@ end
 end
 
 1.upto(2) do |t|
-    AdminUser.create!(email: "admin#{t}@test.com", password: "qwerty")
+    # AdminUser.create!(email: "admin#{t}@test.com", password: "qwerty")
+    AdminUser.where(email: "admin#{t}@test.com").first_or_create!(password: "qwerty")
 end
