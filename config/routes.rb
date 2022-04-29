@@ -20,21 +20,4 @@ Rails.application.routes.draw do
   resources :kudos
   
   root to: "kudos#index"
-
-  devise_scope :admin_user do
-    authenticated :admin_user do
-      namespace :admin_user do
-        get 'pages/dashboard', as: :authenticated_root
-      end
-    end
-  end
-
-  devise_scope :employee do
-    authenticated :employee do
-      namespace :employee do
-        get 'kudos/index', as: :authenticated_root
-      end
-    end
-  end
-
 end
