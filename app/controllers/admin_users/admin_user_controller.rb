@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AdminUser
+module AdminUsers
     class AdminUserController < ApplicationController
         before_action :authenticate_admin_user!
 

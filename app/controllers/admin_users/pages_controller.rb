@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AdminUser
+module AdminUsers
   class PagesController < AdminUserController
     def dashboard; end
   end
