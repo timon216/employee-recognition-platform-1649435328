@@ -42,15 +42,16 @@ RSpec.describe 'Employees', type: :system do
   end
 
   context 'when I sign in' do
+    let!(:employee) { create(:employee) }
+
     before do
-      create(:employee, email: 'employee@test.com', password: 'password')
       visit new_employee_session_path
     end
 
     it 'is succesful' do
       within('form') do
-        fill_in 'Email', with: 'employee@test.com'
-        fill_in 'Password', with: 'password'
+        fill_in 'Email', with: employee.email
+        fill_in 'Password', with: employee.password
       end
       click_button 'Log in'
       expect(page).to have_content('Signed in successfully.')
@@ -59,7 +60,7 @@ RSpec.describe 'Employees', type: :system do
     it 'fails - invalid email' do
       within('form') do
         fill_in 'Email', with: 'employ@test.com'
-        fill_in 'Password', with: 'password'
+        fill_in 'Password', with: employee.password
       end
       click_button 'Log in'
       expect(page).to have_content('Invalid Email or password.')
@@ -67,7 +68,7 @@ RSpec.describe 'Employees', type: :system do
 
     it 'fails - invalid password' do
       within('form') do
-        fill_in 'Email', with: 'employee@test.com'
+        fill_in 'Email', with: employee.email
         fill_in 'Password', with: 'qwerty'
       end
       click_button 'Log in'

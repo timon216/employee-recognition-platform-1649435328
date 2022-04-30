@@ -5,17 +5,17 @@ RSpec.describe 'Kudos', type: :system do
     driven_by(:rack_test)
   end
 
+  let(:giver) { create(:employee) }
+  let!(:receiver) { create(:employee) }
+
   context 'when I create the kudo' do
     before do
-      create(:employee, email: 'employee@test.com', password: 'password')
-      create(:employee, email: 'newemployee@test.com', password: 'password')
       visit new_employee_session_path
       within('form') do
-        fill_in 'Email', with: 'employee@test.com'
-        fill_in 'Password', with: 'password'
+        fill_in 'Email', with: giver.email
+        fill_in 'Password', with: giver.password
       end
       click_button 'Log in'
-
       click_link 'New Kudo'
     end
 
@@ -49,12 +49,10 @@ RSpec.describe 'Kudos', type: :system do
 
   context 'when I edit the kudo' do
     before do
-      create(:employee, email: 'employee@test.com', password: 'password')
-      create(:employee, email: 'newemployee@test.com', password: 'password')
       visit new_employee_session_path
       within('form') do
-        fill_in 'Email', with: 'employee@test.com'
-        fill_in 'Password', with: 'password'
+        fill_in 'Email', with: giver.email
+        fill_in 'Password', with: giver.password
       end
       click_button 'Log in'
       click_link 'New Kudo'
