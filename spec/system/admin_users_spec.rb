@@ -6,15 +6,16 @@ RSpec.describe 'AdminUsers', type: :system do
   end
 
   context 'when I sign in' do
+    let(:admin) { create(:admin_user) }
+
     before do
-      create(:admin_user, email: 'admin1@test.com', password: 'qwerty')
       visit new_admin_user_session_path
     end
 
     it 'is succesful' do
       within('form') do
-        fill_in 'Email', with: 'admin1@test.com'
-        fill_in 'Password', with: 'qwerty'
+        fill_in 'Email', with: admin.email
+        fill_in 'Password', with: admin.password
       end
       click_button 'Log in'
       expect(page).to have_content('Signed in successfully.')
@@ -23,7 +24,7 @@ RSpec.describe 'AdminUsers', type: :system do
     it 'fails - invalid email' do
       within('form') do
         fill_in 'Email', with: 'admin@test.com'
-        fill_in 'Password', with: 'qwerty'
+        fill_in 'Password', with: admin.password
       end
       click_button 'Log in'
       expect(page).to have_content('Invalid Email or password.')
@@ -31,7 +32,7 @@ RSpec.describe 'AdminUsers', type: :system do
 
     it 'fails - invalid password' do
       within('form') do
-        fill_in 'Email', with: 'admin1@test.com'
+        fill_in 'Email', with: admin.email
         fill_in 'Password', with: 'password'
       end
       click_button 'Log in'
