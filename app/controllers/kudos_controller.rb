@@ -51,7 +51,9 @@ class KudosController < ApplicationController
     @kudo.destroy
     redirect_to kudos_url, notice: 'Kudo was successfully destroyed.'
 
-    current_employee.update(number_of_available_kudos: current_employee.number_of_available_kudos + 1)
+    if current_employee.number_of_available_kudos < 10
+      current_employee.update(number_of_available_kudos: current_employee.number_of_available_kudos + 1)
+    end
   end
 
   def correct_employee

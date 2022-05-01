@@ -18,7 +18,9 @@ module AdminUsers
       if @kudo.present?
         @kudo.destroy
         redirect_to admin_users_kudos_url, notice: 'Kudo was successfully destroyed.'
-        @kudo.giver.update(number_of_available_kudos: @kudo.giver.number_of_available_kudos + 1)
+        if @kudo.giver.number_of_available_kudos < 10
+          @kudo.giver.update(number_of_available_kudos: @kudo.giver.number_of_available_kudos + 1)
+        end
       end
     end
 
