@@ -13,7 +13,6 @@ class KudosController < ApplicationController
 
   # GET /kudos/new
   def new
-    # @kudo = Kudo.new
     @kudo = current_employee.given_kudos.build
   end
 
@@ -22,15 +21,19 @@ class KudosController < ApplicationController
 
   # POST /kudos
   def create
-    # @kudo = Kudo.new(kudo_params)
-    @kudo = current_employee.given_kudos.build(kudo_params)
-
-    @kudo.giver = current_employee
-
-    if @kudo.save
-      redirect_to kudos_path, notice: 'Kudo was successfully created.'
+    if current_employee.number_of_available_kudos < 1 
+      redirect_to kudos_path, notice: "You don't have any available kudo to give"
     else
-      render :new
+      @kudo = current_employee.given_kudos.build(kudo_params)
+      @kudo.giver = current_employee
+    
+      if @kudo.save
+        redirect_to kudos_path, notice: 'Kudo was successfully created.'
+
+        current_employee.update(number_of_available_kudos: current_employee.number_of_available_kudos - 1)
+      else
+        render :new
+      end
     end
   end
 
@@ -47,6 +50,8 @@ class KudosController < ApplicationController
   def destroy
     @kudo.destroy
     redirect_to kudos_url, notice: 'Kudo was successfully destroyed.'
+
+    current_employee.update(number_of_available_kudos: current_employee.number_of_available_kudos + 1)
   end
 
   def correct_employee
