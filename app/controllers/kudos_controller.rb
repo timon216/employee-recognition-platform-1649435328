@@ -21,12 +21,12 @@ class KudosController < ApplicationController
 
   # POST /kudos
   def create
-    if current_employee.number_of_available_kudos < 1 
+    if current_employee.number_of_available_kudos < 1
       redirect_to kudos_path, notice: "You don't have any available kudo to give"
     else
       @kudo = current_employee.given_kudos.build(kudo_params)
       @kudo.giver = current_employee
-    
+
       if @kudo.save
         redirect_to kudos_path, notice: 'Kudo was successfully created.'
 
@@ -51,9 +51,9 @@ class KudosController < ApplicationController
     @kudo.destroy
     redirect_to kudos_url, notice: 'Kudo was successfully destroyed.'
 
-    if current_employee.number_of_available_kudos < 10
-      current_employee.update(number_of_available_kudos: current_employee.number_of_available_kudos + 1)
-    end
+    return unless current_employee.number_of_available_kudos < 10
+
+    current_employee.update(number_of_available_kudos: current_employee.number_of_available_kudos + 1)
   end
 
   def correct_employee

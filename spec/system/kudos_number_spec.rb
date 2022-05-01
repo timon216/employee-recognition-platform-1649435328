@@ -21,7 +21,7 @@ RSpec.describe 'Kudos', type: :system do
 
     it 'decreases number of available kudos by 1' do
       click_button 'Create Kudo'
-      expect(page).to have_content("Available kudos: 9")
+      expect(page).to have_content('Available kudos: 9')
     end
   end
 
@@ -30,11 +30,11 @@ RSpec.describe 'Kudos', type: :system do
       sign_in giver
       visit 'kudos'
 
-      10.times do 
-        click_link "New Kudo"
+      10.times do
+        click_link 'New Kudo'
         within('form') do
-            fill_in 'Title', with: 'Nice kudo'
-            fill_in 'Content', with: 'Nice content'
+          fill_in 'Title', with: 'Nice kudo'
+          fill_in 'Content', with: 'Nice content'
         end
         click_button 'Create Kudo'
       end
@@ -63,33 +63,32 @@ RSpec.describe 'Kudos', type: :system do
     end
 
     it 'increases number of available kudos by 1' do
-      click_link "Delete"
-      expect(page).to have_content("Available kudos: 10")
+      click_link 'Delete'
+      expect(page).to have_content('Available kudos: 10')
     end
   end
 
   context 'when admin deletes kudo' do
     before do
-        sign_in giver
-        visit 'kudos/new'
-        within('form') do
-          fill_in 'Title', with: 'Nice kudo'
-          fill_in 'Content', with: 'Nice content'
-        end
-        click_button 'Create Kudo'
-        sign_out giver
-        sign_in admin_user
-        visit '/admin/pages/dashboard'
-        click_link 'Kudos'
+      sign_in giver
+      visit 'kudos/new'
+      within('form') do
+        fill_in 'Title', with: 'Nice kudo'
+        fill_in 'Content', with: 'Nice content'
+      end
+      click_button 'Create Kudo'
+      sign_out giver
+      sign_in admin_user
+      visit '/admin/pages/dashboard'
+      click_link 'Kudos'
     end
 
     it 'increases number of employee\'s available kudos by 1' do
-      click_link "Delete"
+      click_link 'Delete'
       sign_out admin_user
       sign_in giver
       visit 'kudos'
-      expect(page).to have_content("Available kudos: 10")
+      expect(page).to have_content('Available kudos: 10')
     end
   end
-
 end
