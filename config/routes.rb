@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   namespace :admin_users do
     root to: 'pages#dashboard'
     resources :kudos
+    resources :employees
   end
 
   devise_for :admin_users, path: "admin", controllers: {
