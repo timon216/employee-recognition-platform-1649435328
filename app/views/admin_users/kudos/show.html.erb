@@ -1,4 +1,21 @@
-<p id="notice"><%= notice %></p>
+<p>
+  <strong>Title:</strong>
+  <%= @kudo.title %>
+</p>
 
-<%= link_to 'Edit', edit_admin_users_kudo_path(@admin_users_kudo) %> |
-<%= link_to 'Back', admin_users_kudos_path %>
+<p>
+  <strong>Content:</strong>
+  <%= @kudo.content %>
+</p>
+
+<p>
+  <strong>Giver:</strong>
+  <%= @kudo.giver.email %>
+</p>
+
+<p>
+  <strong>Receiver:</strong>
+  <%= @kudo.receiver.email %>
+</p>
+
+<%= link_to 'Back', admin_kudos_path %>

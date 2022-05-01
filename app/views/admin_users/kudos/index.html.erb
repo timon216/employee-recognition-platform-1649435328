@@ -7,13 +7,13 @@
       <th>Content</th>
       <th>Giver</th>
       <th>Receiver</th>
-      <th colspan="2"></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @kudos.each do |kudo| %>
-      <tr data-href="<%= kudo_path(kudo) %>" class="align-middle">
+      <tr data-href="<%= admin_users_kudo_path(kudo) %>" class="align-middle">
         <td><%= kudo.title %></td>
         <td><%= kudo.content %></td>
         <td><%= kudo.giver.email %></td>
