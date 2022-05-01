@@ -14,8 +14,14 @@ module AdminUsers
     # DELETE /admin_users/kudos/1
     def destroy
       @kudo = Kudo.find(params[:id])
-      @kudo.destroy if @kudo.present?
+
+      return if @kudo.blank?
+
+      @kudo.destroy
       redirect_to admin_users_kudos_url, notice: 'Kudo was successfully destroyed.'
+      return unless @kudo.giver.number_of_available_kudos < 10
+
+      @kudo.giver.update(number_of_available_kudos: @kudo.giver.number_of_available_kudos + 1)
     end
 
     private
