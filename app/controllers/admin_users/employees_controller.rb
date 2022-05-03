@@ -1,6 +1,6 @@
 module AdminUsers
   class EmployeesController < ApplicationController
-    before_action :set_admin_users_employee, only: [:show, :edit, :update, :destroy]
+    before_action :set_employee, only: [:show, :edit, :update, :destroy]
     before_action :authenticate_admin_user!
 
     # GET /admin_users/employees
@@ -12,30 +12,19 @@ module AdminUsers
     def show
     end
 
-    # GET /admin_users/employees/new
-    def new
-      @employee = Employee.new
-    end
-
     # GET /admin_users/employees/1/edit
     def edit
     end
 
-    # POST /admin_users/employees
-    def create
-      @employee = Employee.new(admin_users_employee_params)
-
-      if @employee.save
-        redirect_to @employee, notice: 'Employee was successfully created.'
-      else
-        render :new
-      end
-    end
-
     # PATCH/PUT /admin_users/employees/1
     def update
-      if @employee.update(admin_users_employee_params)
-        redirect_to @employee, notice: 'Employee was successfully updated.'
+      if employee_params[:password].blank?
+        if !@employee.update(employee_params.except(:password))
+          render :edit          
+        end
+        redirect_to admin_users_employees_path, notice: 'Employee was successfully updated.'
+      elsif @employee.update(employee_params)
+        redirect_to admin_users_employees_path, notice: 'Employee was successfully updated.'
       else
         render :edit
       end
@@ -49,13 +38,13 @@ module AdminUsers
 
     private
       # Use callbacks to share common setup or constraints between actions.
-      def set_admin_users_employee
+      def set_employee
         @employee = Employee.find(params[:id])
       end
 
       # Only allow a list of trusted parameters through.
-      def admin_users_employee_params
-        params.fetch(:admin_users_employee, {})
+      def employee_params
+        params.require(:employee).permit(:email, :password, :number_of_available_kudos)
       end
   end
 end
