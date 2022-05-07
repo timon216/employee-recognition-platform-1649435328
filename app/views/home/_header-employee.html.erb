@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav nav-employee">
         <% if !employee_signed_in? %>
-            <li class="nav-item"><%= link_to 'Sign in', new_employee_session_path, class:"nav-link" %></li>
+            <li class="nav-item"><%= link_to 'Log in', new_employee_session_path, class:"nav-link" %></li>
             <li class="nav-item"><%= link_to 'Sign up', new_employee_registration_path, class:"nav-link" %></li>
         <% else %>
             <li class="nav-item available-kudos"><%= "Available kudos: #{current_employee.number_of_available_kudos}" %></li>
