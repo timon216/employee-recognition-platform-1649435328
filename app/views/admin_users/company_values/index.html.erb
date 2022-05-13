@@ -1,8 +1,8 @@
-<h1>Admin Users Company Values</h1>
+<h1>Company Values</h1>
 
-<table>
+<table class="table table-light table-striped table-hover">
   <thead>
-    <tr>
+    <tr class="table-dark">
       <th>Title</th>
       <th>Created at</th>
       <th>Updated at</th>
@@ -12,17 +12,15 @@
 
   <tbody>
     <% @company_values.each do |company_value| %>
-      <tr>
+      <tr data-href="<%= admin_users_company_value_path(company_value) %>" class="align-middle">
         <td><%= company_value.title %></td>
         <td><%= company_value.created_at %></td>
         <td><%= company_value.updated_at %></td>
-        <td><%= link_to 'Edit', edit_admin_users_company_value_path(company_value) %></td>
-        <td><%= link_to 'Destroy', admin_users_company_value_path(company_value), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_admin_users_company_value_path(company_value), class:"btn btn-outline-primary" %></td>
+        <td><%= link_to 'Destroy', admin_users_company_value_path(company_value), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Company Value', new_admin_users_company_value_path %>
+<%= link_to 'New Company Value', new_admin_users_company_value_path, class:"btn btn-outline-dark mb-2" %>
