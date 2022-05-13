@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     root to: 'pages#dashboard'
     resources :kudos
     resources :employees
-    resources :company_values, except: [:show]
+    resources :company_values
   end
 
   devise_for :admin_users, path: "admin", controllers: {

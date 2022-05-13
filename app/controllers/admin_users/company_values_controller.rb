@@ -10,6 +10,7 @@ module AdminUsers
 
     # GET /admin_users/company_values/1
     def show
+      @company_value = CompanyValue.find(params[:id])
     end
 
     # GET /admin_users/company_values/new
