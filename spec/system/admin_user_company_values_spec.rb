@@ -31,7 +31,7 @@ RSpec.describe 'AdminUser - CRUD actions for CompanyValue', type: :system do
     end
 
     it 'allows to create new CompanyValue' do
-      click_link "New Company Value"
+      click_link 'New Company Value'
       within('form') do
         fill_in 'Title', with: 'New CompanyValue'
       end
@@ -40,13 +40,13 @@ RSpec.describe 'AdminUser - CRUD actions for CompanyValue', type: :system do
     end
 
     it 'does not allow to create CompanyValue with the same title' do
-        click_link "New Company Value"
-        within('form') do
-          fill_in 'Title', with: company_value.title
-        end
-        click_button 'Create Company value'
-        expect(page).to have_content('Title has already been taken')
+      click_link 'New Company Value'
+      within('form') do
+        fill_in 'Title', with: company_value.title
       end
+      click_button 'Create Company value'
+      expect(page).to have_content('Title has already been taken')
+    end
   end
 
   context 'when I edit CompanyValue' do
@@ -56,7 +56,7 @@ RSpec.describe 'AdminUser - CRUD actions for CompanyValue', type: :system do
     end
 
     it 'allows to update the title' do
-      click_link "Edit"
+      click_link 'Edit'
       within('form') do
         fill_in 'Title', with: 'Edited CompanyValue'
       end

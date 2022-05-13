@@ -1,6 +1,6 @@
 module AdminUsers
   class CompanyValuesController < ApplicationController
-    before_action :set_company_value, only: [:edit, :update, :destroy]
+    before_action :set_company_value, only: %i[edit update destroy]
     before_action :authenticate_admin_user!
 
     # GET /admin_users/company_values
@@ -19,8 +19,7 @@ module AdminUsers
     end
 
     # GET /admin_users/company_values/1/edit
-    def edit
-    end
+    def edit; end
 
     # POST /admin_users/company_values
     def create
@@ -49,14 +48,15 @@ module AdminUsers
     end
 
     private
-      # Use callbacks to share common setup or constraints between actions.
-      def set_company_value
-        @company_value = CompanyValue.find(params[:id])
-      end
 
-      # Only allow a list of trusted parameters through.
-      def company_value_params
-        params.require(:company_value).permit(:title)
-      end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_company_value
+      @company_value = CompanyValue.find(params[:id])
+    end
+
+    # Only allow a list of trusted parameters through.
+    def company_value_params
+      params.require(:company_value).permit(:title)
+    end
   end
 end
