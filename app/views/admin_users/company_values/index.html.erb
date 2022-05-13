@@ -1,0 +1,28 @@
+<h1>Admin Users Company Values</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Created at</th>
+      <th>Updated at</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @company_values.each do |company_value| %>
+      <tr>
+        <td><%= company_value.title %></td>
+        <td><%= company_value.created_at %></td>
+        <td><%= company_value.updated_at %></td>
+        <td><%= link_to 'Edit', edit_admin_users_company_value_path(company_value) %></td>
+        <td><%= link_to 'Destroy', admin_users_company_value_path(company_value), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Company Value', new_admin_users_company_value_path %>

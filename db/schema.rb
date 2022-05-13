@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2022_05_12_184525) do
   end
 
   create_table "company_values", force: :cascade do |t|
-    t.string "title", null: false
+    t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
