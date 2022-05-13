@@ -5,11 +5,13 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'pages#dashboard'
   get 'admin/kudos', to: 'admin_users/kudos#index'
   get 'admin/employees', to: 'admin_users/employees#index'
-  
+  get 'admin/company_values', to: 'admin_users/company_values#index'
+ 
   namespace :admin_users do
     root to: 'pages#dashboard'
     resources :kudos
     resources :employees
+    resources :company_values, except: [:show]
   end
 
   devise_for :admin_users, path: "admin", controllers: {
