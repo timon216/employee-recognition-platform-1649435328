@@ -19,7 +19,7 @@ RSpec.describe 'Kudos', type: :system do
       click_link 'New Kudo'
     end
 
-    it 'is succesful' do
+    it 'allows to create a kudo with title and content' do
       within('form') do
         fill_in 'Title', with: 'Nice kudo'
         fill_in 'Content', with: 'Nice content'
@@ -28,7 +28,7 @@ RSpec.describe 'Kudos', type: :system do
       expect(page).to have_content('Kudo was successfully created.')
     end
 
-    it 'fails - no title' do
+    it 'does not allow to create a kudo without title' do
       within('form') do
         fill_in 'Title', with: ''
         fill_in 'Content', with: 'Nice content'
@@ -37,7 +37,7 @@ RSpec.describe 'Kudos', type: :system do
       expect(page).to have_content('Title can\'t be blank')
     end
 
-    it 'fails - no content' do
+    it 'does not allow to create a kudo without content' do
       within('form') do
         fill_in 'Title', with: 'Kudo'
         fill_in 'Content', with: ''
@@ -64,7 +64,7 @@ RSpec.describe 'Kudos', type: :system do
       click_link 'Edit'
     end
 
-    it 'is succesful' do
+    it 'allows to edit kudo\'s title and content' do
       within('form') do
         fill_in 'Title', with: 'New title'
         fill_in 'Content', with: 'New content'
@@ -73,7 +73,7 @@ RSpec.describe 'Kudos', type: :system do
       expect(page).to have_content('Kudo was successfully updated.')
     end
 
-    it 'fails - no title' do
+    it 'does not allow to update kudo without title' do
       within('form') do
         fill_in 'Title', with: ''
         fill_in 'Content', with: 'New content'
@@ -82,7 +82,7 @@ RSpec.describe 'Kudos', type: :system do
       expect(page).to have_content('Title can\'t be blank')
     end
 
-    it 'fails - no content' do
+    it 'does not allow to update kudo without content' do
       within('form') do
         fill_in 'Title', with: 'New kudo'
         fill_in 'Content', with: ''
@@ -93,7 +93,7 @@ RSpec.describe 'Kudos', type: :system do
   end
 
   context 'when I delete the kudo' do
-    it 'is succesful' do
+    it 'allows to delete the kudo' do
       create(:employee, email: 'employee@test.com', password: 'password')
       create(:employee, email: 'newemployee@test.com', password: 'password')
       visit new_employee_session_path
