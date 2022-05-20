@@ -12,7 +12,7 @@ RSpec.describe 'AdminUsers', type: :system do
       visit new_admin_user_session_path
     end
 
-    it 'is succesful' do
+    it 'allows to sign in with valid email and password' do
       within('form') do
         fill_in 'Email', with: admin.email
         fill_in 'Password', with: admin.password
@@ -21,7 +21,7 @@ RSpec.describe 'AdminUsers', type: :system do
       expect(page).to have_content('Signed in successfully.')
     end
 
-    it 'fails - invalid email' do
+    it 'does not allow to sign in with invalid email' do
       within('form') do
         fill_in 'Email', with: 'admin@test.com'
         fill_in 'Password', with: admin.password
@@ -30,7 +30,7 @@ RSpec.describe 'AdminUsers', type: :system do
       expect(page).to have_content('Invalid Email or password.')
     end
 
-    it 'fails - invalid password' do
+    it 'does not allow to sign in with invalid password' do
       within('form') do
         fill_in 'Email', with: admin.email
         fill_in 'Password', with: 'password'

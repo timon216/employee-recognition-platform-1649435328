@@ -9,7 +9,7 @@ RSpec.describe 'AdminUser - CRUD actions for CompanyValue', type: :system do
   let!(:company_value) { create(:company_value) }
 
   context 'when I list all CompanyValues' do
-    it 'is shows all CompanyValues' do
+    it 'shows all CompanyValues' do
       sign_in admin_user
       visit '/admin/pages/dashboard'
       click_link 'Company Values'

@@ -7,39 +7,36 @@ RSpec.describe 'Kudos', type: :system do
 
   let(:giver) { create(:employee) }
   let!(:receiver) { create(:employee) }
+  let!(:kudo) { create(:kudo, giver: giver, receiver: receiver) }
 
   context 'when I create the kudo' do
     before do
-      visit new_employee_session_path
-      within('form') do
-        fill_in 'Email', with: giver.email
-        fill_in 'Password', with: giver.password
-      end
-      click_button 'Log in'
+      sign_in giver
+      visit kudos_path
       click_link 'New Kudo'
     end
 
-    it 'is succesful' do
+    it 'allows to create a kudo with title and content' do
       within('form') do
-        fill_in 'Title', with: 'Nice kudo'
-        fill_in 'Content', with: 'Nice content'
+        fill_in 'Title', with: kudo.title
+        fill_in 'Content', with: kudo.content
       end
       click_button 'Create Kudo'
       expect(page).to have_content('Kudo was successfully created.')
     end
 
-    it 'fails - no title' do
+    it 'does not allow to create a kudo without title' do
       within('form') do
         fill_in 'Title', with: ''
-        fill_in 'Content', with: 'Nice content'
+        fill_in 'Content', with: kudo.content
       end
       click_button 'Create Kudo'
       expect(page).to have_content('Title can\'t be blank')
     end
 
-    it 'fails - no content' do
+    it 'does not allow to create a kudo without content' do
       within('form') do
-        fill_in 'Title', with: 'Kudo'
+        fill_in 'Title', with: kudo.title
         fill_in 'Content', with: ''
       end
       click_button 'Create Kudo'
@@ -49,22 +46,12 @@ RSpec.describe 'Kudos', type: :system do
 
   context 'when I edit the kudo' do
     before do
-      visit new_employee_session_path
-      within('form') do
-        fill_in 'Email', with: giver.email
-        fill_in 'Password', with: giver.password
-      end
-      click_button 'Log in'
-      click_link 'New Kudo'
-      within('form') do
-        fill_in 'Title', with: 'Nice kudo'
-        fill_in 'Content', with: 'Nice content'
-      end
-      click_button 'Create Kudo'
+      sign_in giver
+      visit kudos_path
       click_link 'Edit'
     end
 
-    it 'is succesful' do
+    it 'allows to edit kudo\'s title and content' do
       within('form') do
         fill_in 'Title', with: 'New title'
         fill_in 'Content', with: 'New content'
@@ -73,7 +60,7 @@ RSpec.describe 'Kudos', type: :system do
       expect(page).to have_content('Kudo was successfully updated.')
     end
 
-    it 'fails - no title' do
+    it 'does not allow to update kudo without title' do
       within('form') do
         fill_in 'Title', with: ''
         fill_in 'Content', with: 'New content'
@@ -82,7 +69,7 @@ RSpec.describe 'Kudos', type: :system do
       expect(page).to have_content('Title can\'t be blank')
     end
 
-    it 'fails - no content' do
+    it 'does not allow to update kudo without content' do
       within('form') do
         fill_in 'Title', with: 'New kudo'
         fill_in 'Content', with: ''
@@ -93,21 +80,9 @@ RSpec.describe 'Kudos', type: :system do
   end
 
   context 'when I delete the kudo' do
-    it 'is succesful' do
-      create(:employee, email: 'employee@test.com', password: 'password')
-      create(:employee, email: 'newemployee@test.com', password: 'password')
-      visit new_employee_session_path
-      within('form') do
-        fill_in 'Email', with: 'employee@test.com'
-        fill_in 'Password', with: 'password'
-      end
-      click_button 'Log in'
-      click_link 'New Kudo'
-      within('form') do
-        fill_in 'Title', with: 'Nice kudo'
-        fill_in 'Content', with: 'Nice content'
-      end
-      click_button 'Create Kudo'
+    it 'allows to delete the kudo' do
+      sign_in giver
+      visit kudos_path
 
       expect { click_link 'Delete' }.to change(Kudo, :count).by(-1)
       expect(page).to have_content('Kudo was successfully destroyed.')

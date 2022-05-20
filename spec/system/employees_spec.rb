@@ -13,7 +13,7 @@ RSpec.describe 'Employees', type: :system do
       end
     end
 
-    it 'is succesful' do
+    it 'allows to sign up with valid password and password confirmation' do
       within('form') do
         fill_in 'Password', with: 'password'
         fill_in 'Password confirmation', with: 'password'
@@ -22,7 +22,7 @@ RSpec.describe 'Employees', type: :system do
       expect(page).to have_content('Welcome! You have signed up successfully.')
     end
 
-    it 'fails - no password' do
+    it 'does not allow to sign up without password' do
       within('form') do
         fill_in 'Password', with: ''
         fill_in 'Password confirmation', with: ''
@@ -31,7 +31,7 @@ RSpec.describe 'Employees', type: :system do
       expect(page).to have_content('Password can\'t be blank')
     end
 
-    it 'fails - password and password confirmation are different' do
+    it 'does not allow to sign up with different password and password confirmation' do
       within('form') do
         fill_in 'Password', with: 'password'
         fill_in 'Password confirmation', with: 'qwerty'
@@ -48,7 +48,7 @@ RSpec.describe 'Employees', type: :system do
       visit new_employee_session_path
     end
 
-    it 'is succesful' do
+    it 'allows to sign in with valid email and password' do
       within('form') do
         fill_in 'Email', with: employee.email
         fill_in 'Password', with: employee.password
@@ -57,7 +57,7 @@ RSpec.describe 'Employees', type: :system do
       expect(page).to have_content('Signed in successfully.')
     end
 
-    it 'fails - invalid email' do
+    it 'does not allow to sign in with invalid email' do
       within('form') do
         fill_in 'Email', with: 'employ@test.com'
         fill_in 'Password', with: employee.password
@@ -66,7 +66,7 @@ RSpec.describe 'Employees', type: :system do
       expect(page).to have_content('Invalid Email or password.')
     end
 
-    it 'fails - invalid password' do
+    it 'does not allow to sign in with invalid password' do
       within('form') do
         fill_in 'Email', with: employee.email
         fill_in 'Password', with: 'qwerty'

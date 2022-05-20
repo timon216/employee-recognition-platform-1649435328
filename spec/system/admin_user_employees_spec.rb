@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'AdminUser - RD actions for kudo', type: :system do
+RSpec.describe 'AdminUser - RUD actions for Employee', type: :system do
   before do
     driven_by(:rack_test)
   end
@@ -9,7 +9,7 @@ RSpec.describe 'AdminUser - RD actions for kudo', type: :system do
   let!(:employee) { create(:employee) }
 
   context 'when I list all employees' do
-    it 'is shows all employees' do
+    it 'shows all employees' do
       sign_in admin_user
       visit '/admin/pages/dashboard'
       click_link 'Employees'
