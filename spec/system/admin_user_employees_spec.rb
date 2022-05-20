@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'AdminUser - RD actions for kudo', type: :system do
+RSpec.describe 'AdminUser - RUD actions for Employee', type: :system do
   before do
     driven_by(:rack_test)
   end
