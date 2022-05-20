@@ -11,7 +11,7 @@ RSpec.describe 'AdminUser - RD actions for kudo', type: :system do
   let!(:kudo) { create(:kudo) }
 
   context 'when I list all kudos' do
-    it 'is shows all kudos' do
+    it 'shows all kudos' do
       sign_in admin_user
       visit '/admin/pages/dashboard'
       click_link 'Kudos'

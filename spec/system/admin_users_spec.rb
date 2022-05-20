@@ -12,7 +12,7 @@ RSpec.describe 'AdminUsers', type: :system do
       visit new_admin_user_session_path
     end
 
-    it 'is allows to sign in with valid email and password' do
+    it 'allows to sign in with valid email and password' do
       within('form') do
         fill_in 'Email', with: admin.email
         fill_in 'Password', with: admin.password
