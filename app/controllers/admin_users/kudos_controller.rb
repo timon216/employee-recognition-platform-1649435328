@@ -1,6 +1,5 @@
 module AdminUsers
   class KudosController < AdminUserController
-    before_action :set_kudo, only: %i[show destroy]
     before_action :authenticate_admin_user!
 
     # GET /admin_users/kudos
@@ -9,12 +8,13 @@ module AdminUsers
     end
 
     # GET /admin_users/kudos/1
-    def show; end
+    def show
+      kudo
+    end
 
     # DELETE /admin_users/kudos/1
     def destroy
-      @kudo = Kudo.find(params[:id])
-
+      kudo
       return if @kudo.blank?
 
       @kudo.destroy
@@ -27,8 +27,8 @@ module AdminUsers
     private
 
     # Use callbacks to share common setup or constraints between actions.
-    def set_kudo
-      @kudo = Kudo.find(params[:id])
+    def kudo
+      @kudo ||= Kudo.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
