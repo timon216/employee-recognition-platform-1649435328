@@ -1,6 +1,5 @@
 module AdminUsers
   class CompanyValuesController < ApplicationController
-    before_action :set_company_value, only: %i[show edit update destroy]
     before_action :authenticate_admin_user!
 
     # GET /admin_users/company_values
@@ -9,7 +8,9 @@ module AdminUsers
     end
 
     # GET /admin_users/company_values/1
-    def show; end
+    def show
+      company_value
+    end
 
     # GET /admin_users/company_values/new
     def new
@@ -17,7 +18,9 @@ module AdminUsers
     end
 
     # GET /admin_users/company_values/1/edit
-    def edit; end
+    def edit
+      company_value
+    end
 
     # POST /admin_users/company_values
     def create
@@ -32,7 +35,7 @@ module AdminUsers
 
     # PATCH/PUT /admin_users/company_values/1
     def update
-      if @company_value.update(company_value_params)
+      if company_value.update(company_value_params)
         redirect_to admin_users_company_values_path, notice: 'Company value was successfully updated.'
       else
         render :edit
@@ -41,14 +44,14 @@ module AdminUsers
 
     # DELETE /admin_users/company_values/1
     def destroy
-      @company_value.destroy
+      company_value.destroy
       redirect_to admin_users_company_values_path, notice: 'Company value was successfully destroyed.'
     end
 
     private
 
     # Use callbacks to share common setup or constraints between actions.
-    def set_company_value
+    def company_value
       @company_value = CompanyValue.find(params[:id])
     end
 
