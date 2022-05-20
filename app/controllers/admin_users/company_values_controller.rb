@@ -1,6 +1,6 @@
 module AdminUsers
   class CompanyValuesController < ApplicationController
-    before_action :set_company_value, only: %i[edit update destroy]
+    before_action :set_company_value, only: %i[show edit update destroy]
     before_action :authenticate_admin_user!
 
     # GET /admin_users/company_values
@@ -9,9 +9,7 @@ module AdminUsers
     end
 
     # GET /admin_users/company_values/1
-    def show
-      @company_value = CompanyValue.find(params[:id])
-    end
+    def show; end
 
     # GET /admin_users/company_values/new
     def new
