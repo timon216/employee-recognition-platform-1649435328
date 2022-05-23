@@ -3,7 +3,7 @@ module AdminUsers
     before_action :authenticate_admin_user!
 
     def index
-      @kudos = Kudo.includes([:giver, :receiver, :company_value]).all
+      @kudos = Kudo.includes(%i[giver receiver company_value]).all
     end
 
     def show
