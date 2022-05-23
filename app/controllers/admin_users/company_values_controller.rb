@@ -44,7 +44,7 @@ module AdminUsers
     private
 
     def company_value
-      @company_value = CompanyValue.find(params[:id])
+      @company_value ||= CompanyValue.find(params[:id])
     end
 
     def company_value_params
