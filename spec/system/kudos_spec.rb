@@ -7,7 +7,9 @@ RSpec.describe 'Kudos', type: :system do
 
   let(:giver) { create(:employee) }
   let!(:receiver) { create(:employee) }
-  let!(:kudo) { create(:kudo, giver: giver, receiver: receiver) }
+  let!(:company_value) { create(:company_value) }
+  let!(:company_value2) { create(:company_value, title: 'Second Company Value') }
+  let!(:kudo) { create(:kudo, giver: giver, receiver: receiver, company_value: company_value) }
 
   context 'when I create the kudo' do
     before do
@@ -16,7 +18,8 @@ RSpec.describe 'Kudos', type: :system do
       click_link 'New Kudo'
     end
 
-    it 'allows to create a kudo with title and content' do
+    # receiver and company value are selected by default
+    it 'allows to create a kudo with title, content, receiver, and company value' do
       within('form') do
         fill_in 'Title', with: kudo.title
         fill_in 'Content', with: kudo.content
@@ -56,6 +59,12 @@ RSpec.describe 'Kudos', type: :system do
         fill_in 'Title', with: 'New title'
         fill_in 'Content', with: 'New content'
       end
+      click_button 'Update Kudo'
+      expect(page).to have_content('Kudo was successfully updated.')
+    end
+
+    it 'allows to edit kudo\'s company value' do
+      select company_value2.title
       click_button 'Update Kudo'
       expect(page).to have_content('Kudo was successfully updated.')
     end

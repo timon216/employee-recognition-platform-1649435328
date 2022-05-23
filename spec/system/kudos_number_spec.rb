@@ -8,6 +8,7 @@ RSpec.describe 'Kudos', type: :system do
   let(:giver) { create(:employee) }
   let!(:receiver) { create(:employee) }
   let(:admin_user) { create(:admin_user) }
+  let!(:company_value) { create(:company_value) }
 
   context 'when I add kudo' do
     before do
