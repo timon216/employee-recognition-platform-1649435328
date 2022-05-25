@@ -1,4 +1,4 @@
-<%= form_with(model: admin_users_kudo) do |form| %>
+<%= form_with(model: [:admin_users, @kudo]) do |form| %>
   <% if admin_users_kudo.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(admin_users_kudo.errors.count, "error") %> prohibited this admin_users_kudo from being saved:</h2>

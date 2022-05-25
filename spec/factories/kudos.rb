@@ -4,5 +4,6 @@ FactoryBot.define do
     content { 'Content' }
     giver
     receiver
+    company_value
   end
 end

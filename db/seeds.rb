@@ -11,16 +11,15 @@
     Employee.where(email: "employee#{t}@test.com").first_or_create!(password: "password")
 end
 
+%w[Honesty Ownership Accountability Passion].each do |company_value_title|
+    CompanyValue.where(title: company_value_title).first_or_create!
+end
+
 1.upto(4) do |t|
-    Kudo.create!(title: "title", content: "very nice kudo #{t}", giver: Employee.find_by(email: "employee#{t}@test.com"), receiver: Employee.find_by(email: "employee#{t+1}@test.com"))
+    Kudo.create!(title: "title", content: "very nice kudo #{t}", giver: Employee.find_by(email: "employee#{t}@test.com"), receiver: Employee.find_by(email: "employee#{t+1}@test.com"), company_value: CompanyValue.all.sample)
 end
 
 1.upto(2) do |t|
     # AdminUser.create!(email: "admin#{t}@test.com", password: "qwerty")
     AdminUser.where(email: "admin#{t}@test.com").first_or_create!(password: "qwerty")
 end
-
-CompanyValue.where(title: "Honesty").first_or_create!
-CompanyValue.where(title: "Ownership").first_or_create!
-CompanyValue.where(title: "Accountability").first_or_create!
-CompanyValue.where(title: "Passion").first_or_create!

@@ -8,6 +8,8 @@ RSpec.describe 'Kudos', type: :system do
   let(:giver) { create(:employee) }
   let!(:receiver) { create(:employee) }
   let(:admin_user) { create(:admin_user) }
+  let!(:company_value) { create(:company_value) }
+  let(:kudo) { create(:kudo, giver: giver, receiver: receiver, company_value: company_value) }
 
   context 'when I add kudo' do
     before do
@@ -16,6 +18,8 @@ RSpec.describe 'Kudos', type: :system do
       within('form') do
         fill_in 'Title', with: 'Nice kudo'
         fill_in 'Content', with: 'Nice content'
+        select receiver.email
+        select company_value.title
       end
     end
 
@@ -36,6 +40,8 @@ RSpec.describe 'Kudos', type: :system do
           fill_in 'Title', with: 'Nice kudo'
           fill_in 'Content', with: 'Nice content'
         end
+        select receiver.email
+        select company_value.title
         click_button 'Create Kudo'
       end
     end
@@ -46,6 +52,8 @@ RSpec.describe 'Kudos', type: :system do
         fill_in 'Title', with: 'Nice kudo'
         fill_in 'Content', with: 'Nice content'
       end
+      select receiver.email
+      select company_value.title
       click_button 'Create Kudo'
       expect(page).to have_content("You don't have any available kudo to give")
     end
@@ -59,6 +67,8 @@ RSpec.describe 'Kudos', type: :system do
         fill_in 'Title', with: 'Nice kudo'
         fill_in 'Content', with: 'Nice content'
       end
+      select receiver.email
+      select company_value.title
       click_button 'Create Kudo'
     end
 
@@ -76,7 +86,10 @@ RSpec.describe 'Kudos', type: :system do
         fill_in 'Title', with: 'Nice kudo'
         fill_in 'Content', with: 'Nice content'
       end
+      select receiver.email
+      select company_value.title
       click_button 'Create Kudo'
+
       sign_out giver
       sign_in admin_user
       visit '/admin/pages/dashboard'
