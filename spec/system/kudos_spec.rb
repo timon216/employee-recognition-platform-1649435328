@@ -16,9 +16,10 @@ RSpec.describe 'Kudos', type: :system do
       sign_in giver
       visit kudos_path
       click_link 'New Kudo'
+      select receiver.email
+      select company_value.title
     end
 
-    # receiver and company value are selected by default
     it 'allows to create a kudo with title, content, receiver, and company value' do
       within('form') do
         fill_in 'Title', with: kudo.title
