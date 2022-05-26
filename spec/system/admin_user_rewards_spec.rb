@@ -46,29 +46,29 @@ RSpec.describe 'AdminUser - CRUD actions for Reward', type: :system do
       within('form') do
         fill_in 'Title', with: reward.title
         fill_in 'Description', with: reward.description
-        fill_in 'Price', with: "0.1"
+        fill_in 'Price', with: '0.1'
       end
       click_button 'Create Reward'
       expect(page).to have_content('Price must be greater than or equal to 1')
     end
 
     it 'does not allow to create Reward with price that is not a number' do
-        click_link 'New Reward'
-        within('form') do
-          fill_in 'Title', with: reward.title
-          fill_in 'Description', with: reward.description
-          fill_in 'Price', with: "abcd"
-        end
-        click_button 'Create Reward'
-        expect(page).to have_content('Price is not a number')
+      click_link 'New Reward'
+      within('form') do
+        fill_in 'Title', with: reward.title
+        fill_in 'Description', with: reward.description
+        fill_in 'Price', with: 'abcd'
+      end
+      click_button 'Create Reward'
+      expect(page).to have_content('Price is not a number')
     end
 
     it 'does not allow to create Reward with empty title, description or price' do
-        click_link 'New Reward'
-        click_button 'Create Reward'
-        expect(page).to have_content('Title can\'t be blank')
-        expect(page).to have_content('Description can\'t be blank')
-        expect(page).to have_content('Price can\'t be blank')
+      click_link 'New Reward'
+      click_button 'Create Reward'
+      expect(page).to have_content('Title can\'t be blank')
+      expect(page).to have_content('Description can\'t be blank')
+      expect(page).to have_content('Price can\'t be blank')
     end
   end
 
@@ -81,9 +81,9 @@ RSpec.describe 'AdminUser - CRUD actions for Reward', type: :system do
     it 'allows to update the title, content and price' do
       click_link 'Edit'
       within('form') do
-        fill_in 'Title', with: "Edited title"
-        fill_in 'Description', with: "Edited description"
-        fill_in 'Price', with: "10"
+        fill_in 'Title', with: 'Edited title'
+        fill_in 'Description', with: 'Edited description'
+        fill_in 'Price', with: '10'
       end
       click_button 'Update Reward'
       expect(page).to have_content('Reward was successfully updated.')
