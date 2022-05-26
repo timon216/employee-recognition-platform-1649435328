@@ -4,7 +4,7 @@
       <h2><%= pluralize(@reward.errors.count, "error") %> prohibited this reward from being saved:</h2>
 
       <ul>
-        <% reward.errors.each do |error| %>
+        <% @reward.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
