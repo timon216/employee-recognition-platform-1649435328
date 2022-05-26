@@ -6,12 +6,14 @@ Rails.application.routes.draw do
   get 'admin/kudos', to: 'admin_users/kudos#index'
   get 'admin/employees', to: 'admin_users/employees#index'
   get 'admin/company_values', to: 'admin_users/company_values#index'
+  get 'admin/rewards', to: 'admin_users/rewards#index'
  
   namespace :admin_users do
     root to: 'pages#dashboard'
     resources :kudos
     resources :employees
     resources :company_values
+    resources :rewards
   end
 
   devise_for :admin_users, path: "admin", controllers: {
