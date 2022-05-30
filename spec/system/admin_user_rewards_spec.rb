@@ -33,9 +33,9 @@ RSpec.describe 'AdminUser - CRUD actions for Reward', type: :system do
     it 'allows to create new Reward' do
       click_link 'New Reward'
       within('form') do
-        fill_in 'Title', with: reward.title
-        fill_in 'Description', with: reward.description
-        fill_in 'Price', with: reward.price
+        fill_in 'Title', with: "Awesome Reward Title"
+        fill_in 'Description', with: "Awesome Reward Description"
+        fill_in 'Price', with: "99"
       end
       click_button 'Create Reward'
       expect(page).to have_content('Reward was successfully created.')
@@ -50,25 +50,6 @@ RSpec.describe 'AdminUser - CRUD actions for Reward', type: :system do
       end
       click_button 'Create Reward'
       expect(page).to have_content('Price must be greater than or equal to 1')
-    end
-
-    it 'does not allow to create Reward with price that is not a number' do
-      click_link 'New Reward'
-      within('form') do
-        fill_in 'Title', with: reward.title
-        fill_in 'Description', with: reward.description
-        fill_in 'Price', with: 'abcd'
-      end
-      click_button 'Create Reward'
-      expect(page).to have_content('Price is not a number')
-    end
-
-    it 'does not allow to create Reward with empty title, description or price' do
-      click_link 'New Reward'
-      click_button 'Create Reward'
-      expect(page).to have_content('Title can\'t be blank')
-      expect(page).to have_content('Description can\'t be blank')
-      expect(page).to have_content('Price can\'t be blank')
     end
   end
 
