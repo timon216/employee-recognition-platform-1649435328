@@ -33,9 +33,9 @@ RSpec.describe 'AdminUser - CRUD actions for Reward', type: :system do
     it 'allows to create new Reward' do
       click_link 'New Reward'
       within('form') do
-        fill_in 'Title', with: "Awesome Reward Title"
-        fill_in 'Description', with: "Awesome Reward Description"
-        fill_in 'Price', with: "99"
+        fill_in 'Title', with: 'Awesome Reward Title'
+        fill_in 'Description', with: 'Awesome Reward Description'
+        fill_in 'Price', with: '99'
       end
       click_button 'Create Reward'
       expect(page).to have_content('Reward was successfully created.')
