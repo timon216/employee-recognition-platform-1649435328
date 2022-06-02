@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe 'AdminUsers', type: :system do
+RSpec.describe 'Admins', type: :system do
   before do
     driven_by(:rack_test)
   end
 
   context 'when I sign in' do
-    let(:admin) { create(:admin_user) }
+    let(:admin) { create(:admin) }
 
     before do
-      visit new_admin_user_session_path
+      visit new_admin_session_path
     end
 
     it 'allows to sign in with valid email and password' do

@@ -1,17 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe 'AdminUser - CRUD actions for CompanyValue', type: :system do
+RSpec.describe 'Admin - CRUD actions for CompanyValue', type: :system do
   before do
     driven_by(:rack_test)
   end
 
-  let(:admin_user) { create(:admin_user) }
+  let(:admin) { create(:admin) }
   let!(:company_value) { create(:company_value) }
 
   context 'when I list all CompanyValues' do
     it 'shows all CompanyValues' do
-      sign_in admin_user
-      visit '/admin/pages/dashboard'
+      sign_in admin
+      visit '/admins/pages/dashboard'
       click_link 'Company Values'
       expect(page).to have_content company_value.title
       expect(page).to have_content company_value.created_at
@@ -19,15 +19,15 @@ RSpec.describe 'AdminUser - CRUD actions for CompanyValue', type: :system do
     end
 
     it 'does not show CompanyValues without logging in' do
-      visit '/admin/company_values'
+      visit '/admins/company_values'
       expect(page).to have_current_path '/admin/sign_in'
     end
   end
 
   context 'when I create CompanyValue' do
     before do
-      sign_in admin_user
-      visit '/admin/company_values'
+      sign_in admin
+      visit '/admins/company_values'
     end
 
     it 'allows to create new CompanyValue' do
@@ -51,8 +51,8 @@ RSpec.describe 'AdminUser - CRUD actions for CompanyValue', type: :system do
 
   context 'when I edit CompanyValue' do
     before do
-      sign_in admin_user
-      visit '/admin/company_values'
+      sign_in admin
+      visit '/admins/company_values'
     end
 
     it 'allows to update the title' do
@@ -67,8 +67,8 @@ RSpec.describe 'AdminUser - CRUD actions for CompanyValue', type: :system do
 
   context 'when I delete Company Value' do
     before do
-      sign_in admin_user
-      visit '/admin/company_values'
+      sign_in admin
+      visit '/admins/company_values'
     end
 
     it 'allows to delete the CompanyValue' do

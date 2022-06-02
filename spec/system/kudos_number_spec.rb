@@ -7,7 +7,7 @@ RSpec.describe 'Kudos', type: :system do
 
   let(:giver) { create(:employee) }
   let!(:receiver) { create(:employee) }
-  let(:admin_user) { create(:admin_user) }
+  let(:admin) { create(:admin) }
   let!(:company_value) { create(:company_value) }
   let(:kudo) { create(:kudo, giver: giver, receiver: receiver, company_value: company_value) }
 
@@ -91,14 +91,14 @@ RSpec.describe 'Kudos', type: :system do
       click_button 'Create Kudo'
 
       sign_out giver
-      sign_in admin_user
-      visit '/admin/pages/dashboard'
+      sign_in admin
+      visit '/admins/pages/dashboard'
       click_link 'Kudos'
     end
 
     it 'increases number of employee\'s available kudos by 1' do
       click_link 'Delete'
-      sign_out admin_user
+      sign_out admin
       sign_in giver
       visit 'kudos'
       expect(page).to have_content('Available kudos: 10')

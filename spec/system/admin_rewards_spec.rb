@@ -1,17 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe 'AdminUser - CRUD actions for Reward', type: :system do
+RSpec.describe 'Admin - CRUD actions for Reward', type: :system do
   before do
     driven_by(:rack_test)
   end
 
-  let(:admin_user) { create(:admin_user) }
+  let(:admin) { create(:admin) }
   let!(:reward) { create(:reward) }
 
   context 'when I list all Rewards' do
     it 'shows all Rewards' do
-      sign_in admin_user
-      visit '/admin/pages/dashboard'
+      sign_in admin
+      visit '/admins/pages/dashboard'
       click_link 'Rewards'
       expect(page).to have_content reward.title
       expect(page).to have_content reward.description
@@ -19,15 +19,15 @@ RSpec.describe 'AdminUser - CRUD actions for Reward', type: :system do
     end
 
     it 'does not show Rewards without logging in' do
-      visit '/admin/rewards'
+      visit '/admins/rewards'
       expect(page).to have_current_path '/admin/sign_in'
     end
   end
 
   context 'when I create Reward' do
     before do
-      sign_in admin_user
-      visit '/admin/rewards'
+      sign_in admin
+      visit '/admins/rewards'
     end
 
     it 'allows to create new Reward' do
@@ -55,8 +55,8 @@ RSpec.describe 'AdminUser - CRUD actions for Reward', type: :system do
 
   context 'when I edit Reward' do
     before do
-      sign_in admin_user
-      visit '/admin/rewards'
+      sign_in admin
+      visit '/admins/rewards'
     end
 
     it 'allows to update the title, content and price' do
@@ -73,8 +73,8 @@ RSpec.describe 'AdminUser - CRUD actions for Reward', type: :system do
 
   context 'when I delete Reward' do
     before do
-      sign_in admin_user
-      visit '/admin/rewards'
+      sign_in admin
+      visit '/admins/rewards'
     end
 
     it 'allows to delete the Reward' do

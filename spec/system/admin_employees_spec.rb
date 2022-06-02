@@ -1,17 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe 'AdminUser - RUD actions for Employee', type: :system do
+RSpec.describe 'Admin - RUD actions for Employee', type: :system do
   before do
     driven_by(:rack_test)
   end
 
-  let(:admin_user) { create(:admin_user) }
+  let(:admin) { create(:admin) }
   let!(:employee) { create(:employee) }
 
   context 'when I list all employees' do
     it 'shows all employees' do
-      sign_in admin_user
-      visit '/admin/pages/dashboard'
+      sign_in admin
+      visit '/admins/pages/dashboard'
       click_link 'Employees'
       expect(page).to have_content employee.email
       expect(page).to have_content employee.number_of_available_kudos
@@ -20,15 +20,15 @@ RSpec.describe 'AdminUser - RUD actions for Employee', type: :system do
     end
 
     it 'does not show employees without logging in' do
-      visit '/admin/employees'
+      visit '/admins/employees'
       expect(page).to have_current_path '/admin/sign_in'
     end
   end
 
   context 'when I delete employee' do
     before do
-      sign_in admin_user
-      visit '/admin/employees'
+      sign_in admin
+      visit '/admins/employees'
     end
 
     it 'allows to delete the employee' do
@@ -39,8 +39,8 @@ RSpec.describe 'AdminUser - RUD actions for Employee', type: :system do
 
   context 'when I edit employee' do
     before do
-      sign_in admin_user
-      visit '/admin/employees'
+      sign_in admin
+      visit '/admins/employees'
       click_link 'Edit'
     end
 

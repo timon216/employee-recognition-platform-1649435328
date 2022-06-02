@@ -1,19 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe 'AdminUser - RD actions for kudo', type: :system do
+RSpec.describe 'Admin - RD actions for kudo', type: :system do
   before do
     driven_by(:rack_test)
   end
 
-  let(:admin_user) { create(:admin_user) }
+  let(:admin) { create(:admin) }
   let(:giver) { create(:employee) }
   let!(:receiver) { create(:employee) }
   let!(:kudo) { create(:kudo) }
 
   context 'when I list all kudos' do
     it 'shows all kudos' do
-      sign_in admin_user
-      visit '/admin/pages/dashboard'
+      sign_in admin
+      visit '/admins/pages/dashboard'
       click_link 'Kudos'
       expect(page).to have_content kudo.title
       expect(page).to have_content kudo.content
@@ -23,15 +23,15 @@ RSpec.describe 'AdminUser - RD actions for kudo', type: :system do
     end
 
     it 'does not show kudos without logging in' do
-      visit '/admin/kudos'
+      visit '/admins/kudos'
       expect(page).to have_current_path '/admin/sign_in'
     end
   end
 
   context 'when I delete kudos' do
     before do
-      sign_in admin_user
-      visit '/admin/kudos'
+      sign_in admin
+      visit '/admins/kudos'
     end
 
     it 'allows to delete the kudo' do
