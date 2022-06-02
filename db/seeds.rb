@@ -20,8 +20,7 @@ end
 end
 
 1.upto(2) do |t|
-    # AdminUser.create!(email: "admin#{t}@test.com", password: "qwerty")
-    AdminUser.where(email: "admin#{t}@test.com").first_or_create!(password: "qwerty")
+    Admin.where(email: "admin#{t}@test.com").first_or_create!(password: "qwerty")
 end
 
 1.upto(10) do |t|
