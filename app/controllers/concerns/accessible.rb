@@ -7,11 +7,11 @@ module Accessible
   protected
 
   def check_user
-    if current_admin_user
+    if current_admin
       flash.clear
       set_flash_message! :notice, :signed_in
       # if you have rails_admin. You can redirect anywhere really
-      redirect_to(admin_pages_dashboard_path) and return
+      redirect_to(admins_pages_dashboard_path) and return
     elsif current_employee
       flash.clear
       set_flash_message! :notice, :signed_in
