@@ -18,8 +18,8 @@
   </head>
   <body>
 
-    <% if admin_user_signed_in? %>
-      <%= render 'home/header-admin_user' %>
+    <% if admin_signed_in? %>
+      <%= render 'home/header-admin' %>
     <% elsif employee_signed_in? %>
     <%= render 'home/header-employee' %>
     <% else %>

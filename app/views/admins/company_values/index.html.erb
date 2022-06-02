@@ -1,0 +1,27 @@
+<h1>Company Values</h1>
+
+<table class="table table-light table-striped table-hover">
+  <thead>
+    <tr class="table-dark">
+      <th>Title</th>
+      <th>Created at</th>
+      <th>Updated at</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @company_values.each do |company_value| %>
+      <tr data-href="<%= admins_company_value_path(company_value) %>" class="align-middle">
+        <td><%= company_value.title %></td>
+        <td><%= company_value.created_at %></td>
+        <td><%= company_value.updated_at %></td>
+        <td><%= link_to 'Edit', edit_admins_company_value_path(company_value), class:"btn btn-outline-primary" %></td>
+        <td><%= link_to 'Delete', admins_company_value_path(company_value), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Company Value', new_admins_company_value_path, class:"btn btn-outline-dark mb-3" %><br>
+<%= link_to 'Back to Dashboard', admins_pages_dashboard_path, class:"btn btn-outline-secondary mb-2" %>
