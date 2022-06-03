@@ -1,0 +1,22 @@
+<h1>Rewards</h1>
+
+<table class="table table-light table-striped table-hover table-rewards">
+  <thead>
+    <tr class="table-dark">
+      <th>Title</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rewards.each do |reward| %>
+      <tr data-href="<%= reward_path(reward) %>" class="align-middle clickable-row">
+        <td><%= reward.title %></td>
+        <td><%= reward.price %></td>
+        <td><%= link_to 'Show details', reward_path(reward), class:"btn btn-outline-primary" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
