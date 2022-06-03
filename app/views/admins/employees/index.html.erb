@@ -1,0 +1,26 @@
+<h1>Employees</h1>
+
+<table class="table table-light table-striped table-hover">
+  <thead>
+    <tr class="table-dark">
+      <tr class="table-dark">
+      <th>Email</th>
+      <th>Available kudos</th>
+      <th colspan="2"></th>
+    </tr>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr data-href="<%= admins_employee_path(employee) %>" class="align-middle">
+        <td><%= employee.email  %></td>
+        <td><%= employee.number_of_available_kudos  %></td>
+        <td><%= link_to 'Edit', edit_admins_employee_path(employee), class:"btn btn-outline-primary" %></td>
+        <td><%= link_to 'Delete', admins_employee_path(employee), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back to Dashboard', admins_pages_dashboard_path, class:"btn btn-outline-secondary mb-2" %>

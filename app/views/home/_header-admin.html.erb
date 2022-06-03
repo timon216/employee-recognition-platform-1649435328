@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+  <div class="container">
+    <%= link_to 'Company Name', admins_pages_dashboard_path, class:"navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav admin-panel">
+        <% if !admin_signed_in? %>
+            <li class="nav-item"><%= link_to 'Admin Panel', new_admin_session_path, class:"nav-link" %></li>
+        <% elsif admin_signed_in? %>
+            <li class="nav-item"><%= link_to 'Rewards', admins_rewards_path, class:"nav-link" %></li>
+            <li class="nav-item"><%= link_to 'Company Values', admins_company_values_path, class:"nav-link" %></li>
+            <li class="nav-item"><%= link_to 'Kudos', admins_kudos_path, class:"nav-link" %></li>
+            <li class="nav-item"><%= link_to 'Employees', admins_employees_path, class:"nav-link" %></li>
+            <li class="nav-item"><%= link_to 'Sign out', destroy_admin_session_path, method: :delete, class:"nav-link" %></li>
+        <% end %>
+    </ul>
+    <ul class="navbar-nav ">
+      
+    </ul>
+    </div>
+  </div>
+</nav>

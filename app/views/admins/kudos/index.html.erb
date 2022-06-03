@@ -1,0 +1,29 @@
+<h1>Kudos</h1>
+
+<table class="table table-light table-striped table-hover">
+  <thead>
+    <tr class="table-dark">
+      <th>Title</th>
+      <th>Content</th>
+      <th>Giver</th>
+      <th>Receiver</th>
+      <th>Company Value</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kudos.each do |kudo| %>
+      <tr data-href="<%= admins_kudo_path(kudo) %>" class="align-middle">
+        <td><%= kudo.title %></td>
+        <td><%= kudo.content %></td>
+        <td><%= kudo.giver.email %></td>
+        <td><%= kudo.receiver.email %></td>
+        <td><%= kudo.company_value.title %></td>
+        <td><%= link_to 'Delete', admins_kudo_path(kudo), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back to Dashboard', admins_pages_dashboard_path, class:"btn btn-outline-secondary mb-2" %>
