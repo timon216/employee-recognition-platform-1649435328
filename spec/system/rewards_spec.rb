@@ -25,6 +25,8 @@ RSpec.describe 'Listing available Rewards to employees', type: :system do
       sign_in employee
       visit rewards_path
       click_link 'Show details'
+      expect(page).to have_content reward.title
+      expect(page).to have_content reward.price
       expect(page).to have_content reward.description
     end
   end
