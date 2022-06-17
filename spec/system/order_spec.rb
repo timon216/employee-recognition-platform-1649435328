@@ -14,9 +14,11 @@ RSpec.describe 'Order - buying a Reward', type: :system do
     it 'lowers number of points after purchase' do
       sign_in employee1
       visit rewards_path
+      expect(page).to have_content('Earned points: 1')
       click_link 'Buy reward'
       expect(page).to have_content('You have bought a new reward')
       expect(employee1.earned_points).to eq(0)
+      expect(page).to have_content('Earned points: 0')
     end
 
     it 'does not allow to buy too expensive Reward' do
