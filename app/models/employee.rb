@@ -9,7 +9,6 @@ class Employee < ApplicationRecord
   has_many :orders, dependent: :nullify
   has_many :rewards, through: :orders
 
-
   def earned_points
     received_kudos.count
     received_kudos.count - rewards.sum(:price).to_i
