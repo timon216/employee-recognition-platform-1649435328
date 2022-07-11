@@ -8,8 +8,8 @@ RSpec.describe 'Admin - RUD actions for Employee', type: :system do
   let(:admin) { create(:admin) }
   let!(:employee) { create(:employee) }
 
-  context 'when I list all employees' do
-    it 'shows all employees' do
+  context 'when Admin lists all Employees' do
+    it 'shows all Employees' do
       sign_in admin
       visit '/admins/pages/dashboard'
       click_link 'Employees'
@@ -19,32 +19,32 @@ RSpec.describe 'Admin - RUD actions for Employee', type: :system do
       expect(page).to have_content('Delete')
     end
 
-    it 'does not show employees without logging in' do
+    it 'does not show Employees without Admin logging in' do
       visit '/admins/employees'
       expect(page).to have_current_path '/admin/sign_in'
     end
   end
 
-  context 'when I delete employee' do
+  context 'when Admin deletes the Employee' do
     before do
       sign_in admin
       visit '/admins/employees'
     end
 
-    it 'allows to delete the employee' do
+    it 'allows to delete the Employee' do
       expect { click_link 'Delete' }.to change(Employee, :count).by(-1)
       expect(page).to have_content('Employee was successfully destroyed.')
     end
   end
 
-  context 'when I edit employee' do
+  context 'when Admin edits the Employee' do
     before do
       sign_in admin
       visit '/admins/employees'
       click_link 'Edit'
     end
 
-    it 'allows to edit employee with changing password' do
+    it 'allows to edit Employee with changing password' do
       within('form') do
         fill_in 'Email', with: 'test2@test.com'
         fill_in 'Password', with: 'password2'
@@ -53,7 +53,7 @@ RSpec.describe 'Admin - RUD actions for Employee', type: :system do
       expect(page).to have_content('Employee was successfully updated.')
     end
 
-    it 'allows to edit employee without changing password' do
+    it 'allows to edit Employee without changing password' do
       within('form') do
         fill_in 'Email', with: 'test2a@test.com'
       end

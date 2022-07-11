@@ -10,7 +10,7 @@ RSpec.describe 'Kudos', type: :system do
   let!(:company_value) { create(:company_value) }
   let!(:company_value2) { create(:company_value, title: 'Second Company Value') }
 
-  context 'when I create the kudo' do
+  context 'when Employee creates the Kudo' do
     before do
       sign_in giver
       visit kudos_path
@@ -19,7 +19,7 @@ RSpec.describe 'Kudos', type: :system do
       select company_value.title
     end
 
-    it 'allows to create a kudo and increases number of receiver\'s earned points' do
+    it 'allows to create a Kudo and increases number of receiver\'s earned points' do
       within('form') do
         fill_in 'Title', with: 'Nice kudo title'
         fill_in 'Content', with: 'Nice kudo content'
@@ -30,7 +30,7 @@ RSpec.describe 'Kudos', type: :system do
     end
   end
 
-  context 'when I edit the kudo' do
+  context 'when Employee edits the Kudo' do
     before do
       create(:kudo, giver: giver, receiver: receiver, company_value: company_value)
       sign_in giver
@@ -38,7 +38,7 @@ RSpec.describe 'Kudos', type: :system do
       click_link 'Edit'
     end
 
-    it 'allows to edit kudo\'s title and content' do
+    it 'allows to edit Kudo\'s title and content' do
       within('form') do
         fill_in 'Title', with: 'New title'
         fill_in 'Content', with: 'New content'
@@ -47,15 +47,15 @@ RSpec.describe 'Kudos', type: :system do
       expect(page).to have_content('Kudo was successfully updated.')
     end
 
-    it 'allows to edit kudo\'s company value' do
+    it 'allows to edit Kudo\'s company value' do
       select company_value2.title
       click_button 'Update Kudo'
       expect(page).to have_content('Kudo was successfully updated.')
     end
   end
 
-  context 'when I delete the kudo' do
-    it 'allows to delete the kudo and decreases number of receiver\'s earned points' do
+  context 'when Employee deletes the Kudo' do
+    it 'allows to delete the Kudo and decreases number of receiver\'s earned points' do
       create(:kudo, giver: giver, receiver: receiver, company_value: company_value)
       sign_in giver
       visit kudos_path

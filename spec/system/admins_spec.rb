@@ -5,7 +5,7 @@ RSpec.describe 'Admins', type: :system do
     driven_by(:rack_test)
   end
 
-  context 'when I sign in' do
+  context 'when Admin signs in' do
     let(:admin) { create(:admin) }
 
     before do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Listing available Rewards to employees', type: :system do
+RSpec.describe 'Listing available Rewards to Employees', type: :system do
   before do
     driven_by(:rack_test)
   end
@@ -8,7 +8,7 @@ RSpec.describe 'Listing available Rewards to employees', type: :system do
   let(:employee) { create(:employee) }
   let!(:reward) { create(:reward) }
 
-  context 'when I list all Rewards' do
+  context 'when Employee lists all Rewards' do
     it 'shows all Rewards' do
       sign_in employee
       visit rewards_path

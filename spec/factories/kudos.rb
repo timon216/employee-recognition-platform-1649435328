@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :kudo do
-    title { 'Title' }
-    content { 'Content' }
+    sequence(:title) { |i| "Kudo Title #{i}" }
+    sequence(:content) { |i| "Kudo Content #{i}" }
     giver
     receiver
     company_value

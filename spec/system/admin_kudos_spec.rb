@@ -10,8 +10,8 @@ RSpec.describe 'Admin - RD actions for kudo', type: :system do
   let!(:receiver) { create(:employee) }
   let!(:kudo) { create(:kudo) }
 
-  context 'when I list all kudos' do
-    it 'shows all kudos' do
+  context 'when Admin lists all Kudos' do
+    it 'shows all Kudos' do
       sign_in admin
       visit '/admins/pages/dashboard'
       click_link 'Kudos'
@@ -22,13 +22,13 @@ RSpec.describe 'Admin - RD actions for kudo', type: :system do
       expect(page).to have_content('Delete')
     end
 
-    it 'does not show kudos without logging in' do
+    it 'does not show Kudos without Admin logging in' do
       visit '/admins/kudos'
       expect(page).to have_current_path '/admin/sign_in'
     end
   end
 
-  context 'when I delete kudos' do
+  context 'when Admin deletes the Kudo' do
     before do
       sign_in admin
       visit '/admins/kudos'

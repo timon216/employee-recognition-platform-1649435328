@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin - CRUD actions for CompanyValue', type: :system do
+RSpec.describe 'Admin - CRUD actions for Company Value', type: :system do
   before do
     driven_by(:rack_test)
   end
@@ -8,8 +8,8 @@ RSpec.describe 'Admin - CRUD actions for CompanyValue', type: :system do
   let(:admin) { create(:admin) }
   let!(:company_value) { create(:company_value) }
 
-  context 'when I list all CompanyValues' do
-    it 'shows all CompanyValues' do
+  context 'when Admin lists all Company Values' do
+    it 'shows all Company Values' do
       sign_in admin
       visit '/admins/pages/dashboard'
       click_link 'Company Values'
@@ -18,28 +18,28 @@ RSpec.describe 'Admin - CRUD actions for CompanyValue', type: :system do
       expect(page).to have_content company_value.updated_at
     end
 
-    it 'does not show CompanyValues without logging in' do
+    it 'does not show Company Values without Admin logging in' do
       visit '/admins/company_values'
       expect(page).to have_current_path '/admin/sign_in'
     end
   end
 
-  context 'when I create CompanyValue' do
+  context 'when Admin creates Company Value' do
     before do
       sign_in admin
       visit '/admins/company_values'
     end
 
-    it 'allows to create new CompanyValue' do
+    it 'allows to create new Company Value' do
       click_link 'New Company Value'
       within('form') do
-        fill_in 'Title', with: 'New CompanyValue'
+        fill_in 'Title', with: 'New Company Value'
       end
       click_button 'Create Company value'
       expect(page).to have_content('Company value was successfully created.')
     end
 
-    it 'does not allow to create CompanyValue with the same title' do
+    it 'does not allow to create Company Value with the same title' do
       click_link 'New Company Value'
       within('form') do
         fill_in 'Title', with: company_value.title
@@ -49,7 +49,7 @@ RSpec.describe 'Admin - CRUD actions for CompanyValue', type: :system do
     end
   end
 
-  context 'when I edit CompanyValue' do
+  context 'when Admin edits the Company Value' do
     before do
       sign_in admin
       visit '/admins/company_values'
@@ -65,13 +65,13 @@ RSpec.describe 'Admin - CRUD actions for CompanyValue', type: :system do
     end
   end
 
-  context 'when I delete Company Value' do
+  context 'when Admin deletes Company Value' do
     before do
       sign_in admin
       visit '/admins/company_values'
     end
 
-    it 'allows to delete the CompanyValue' do
+    it 'allows to delete the Company Value' do
       expect { click_link 'Delete' }.to change(CompanyValue, :count).by(-1)
       expect(page).to have_content('Company value was successfully destroyed.')
     end
