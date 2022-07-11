@@ -8,7 +8,7 @@ RSpec.describe 'Admin - CRUD actions for Reward', type: :system do
   let(:admin) { create(:admin) }
   let!(:reward) { create(:reward) }
 
-  context 'when I list all Rewards' do
+  context 'when Admin lists all Rewards' do
     it 'shows all Rewards' do
       sign_in admin
       visit '/admins/pages/dashboard'
@@ -18,13 +18,13 @@ RSpec.describe 'Admin - CRUD actions for Reward', type: :system do
       expect(page).to have_content reward.price
     end
 
-    it 'does not show Rewards without logging in' do
+    it 'does not show Rewards without Admin logging in' do
       visit '/admins/rewards'
       expect(page).to have_current_path '/admin/sign_in'
     end
   end
 
-  context 'when I create Reward' do
+  context 'when Admin creates the Reward' do
     before do
       sign_in admin
       visit '/admins/rewards'
@@ -53,7 +53,7 @@ RSpec.describe 'Admin - CRUD actions for Reward', type: :system do
     end
   end
 
-  context 'when I edit Reward' do
+  context 'when Admin edits the Reward' do
     before do
       sign_in admin
       visit '/admins/rewards'
@@ -71,7 +71,7 @@ RSpec.describe 'Admin - CRUD actions for Reward', type: :system do
     end
   end
 
-  context 'when I delete Reward' do
+  context 'when admin deletes the Reward' do
     before do
       sign_in admin
       visit '/admins/rewards'

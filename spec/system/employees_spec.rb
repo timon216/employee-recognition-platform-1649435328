@@ -5,7 +5,7 @@ RSpec.describe 'Employees', type: :system do
     driven_by(:rack_test)
   end
 
-  context 'when I sign up' do
+  context 'when Employee signs up' do
     before do
       visit new_employee_registration_path
       within('form') do
@@ -41,7 +41,7 @@ RSpec.describe 'Employees', type: :system do
     end
   end
 
-  context 'when I sign in' do
+  context 'when Employee signs in' do
     let!(:employee) { create(:employee) }
 
     before do
