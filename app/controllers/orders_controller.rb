@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_employee!
 
-  def index 
+  def index
     @orders = Order.where(employee: current_employee)
   end
 

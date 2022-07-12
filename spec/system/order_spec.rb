@@ -7,13 +7,12 @@ RSpec.describe 'Order - buying a Reward and listing Orders to Employee', type: :
 
   let(:employee1) { create(:employee) }
   let(:employee2) { create(:employee) }
-  let(:employee3) { create(:employee) }
-  let(:admin) { create(:admin) }
-  let!(:kudo) { create(:kudo, receiver: employee1) }
   let!(:reward1) { create(:reward, price: 1) }
-  let!(:order) { create(:order, employee: employee3, reward: reward1) }
+  let!(:order) { create(:order, employee: employee2, reward: reward1) }
 
   context 'when an Employee buys a Reward' do
+    let!(:kudo) { create(:kudo, receiver: employee1) }
+
     it 'lowers number of points after purchase' do
       sign_in employee1
       visit rewards_path
@@ -22,18 +21,11 @@ RSpec.describe 'Order - buying a Reward and listing Orders to Employee', type: :
       expect(page).to have_content('You have bought a new reward')
       expect(page).to have_content('Earned points: 0')
     end
-
-    it 'does not allow to buy too expensive Reward' do
-      sign_in employee2
-      visit rewards_path
-      expect(employee2.earned_points).to eq(0)
-      expect(page).to have_no_content('Buy reward')
-    end
   end
 
   context 'when Employee lists bought Rewards' do
     it 'shows all Orders' do
-      sign_in employee3
+      sign_in employee2
       visit orders_path
       expect(page).to have_content order.reward_snapshot.title
       expect(page).to have_content order.reward_snapshot.description
@@ -43,6 +35,8 @@ RSpec.describe 'Order - buying a Reward and listing Orders to Employee', type: :
   end
 
   context 'when Admin changes Reward\'s current price' do
+    let(:admin) { create(:admin) }
+
     before do
       sign_in admin
       visit '/admins/rewards'
@@ -54,7 +48,7 @@ RSpec.describe 'Order - buying a Reward and listing Orders to Employee', type: :
     end
 
     it 'does not affect the price displayed in list of Employee\'s Orders' do
-      sign_in employee3
+      sign_in employee2
       visit orders_path
       expect(order.snapshot_price).to eq(1)
       expect(page).to have_content('1.0')
