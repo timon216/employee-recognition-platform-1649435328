@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   resources :kudos
   resources :rewards, only: %i[index show]
-  resources :orders, only: %i[create]
+  resources :orders, only: %i[create index]
   
   root to: "kudos#index"
 end
