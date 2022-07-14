@@ -11,7 +11,9 @@ RSpec.describe 'Order - buying a Reward and listing Orders to Employee', type: :
   let!(:order) { create(:order, employee: employee2, reward: reward1) }
 
   context 'when an Employee buys a Reward' do
-    let!(:kudo) { create(:kudo, receiver: employee1) }
+    before do
+      create(:kudo, receiver: employee1)
+    end
 
     it 'lowers number of points after purchase' do
       sign_in employee1
@@ -30,7 +32,7 @@ RSpec.describe 'Order - buying a Reward and listing Orders to Employee', type: :
       expect(page).to have_content order.reward_snapshot.title
       expect(page).to have_content order.reward_snapshot.description
       expect(page).to have_content order.created_at.strftime('%d/%m/%Y')
-      expect(page).to have_content order.snapshot_price
+      expect(page).to have_content order.purchase_price
     end
   end
 
@@ -50,7 +52,7 @@ RSpec.describe 'Order - buying a Reward and listing Orders to Employee', type: :
     it 'does not affect the price displayed in list of Employee\'s Orders' do
       sign_in employee2
       visit orders_path
-      expect(order.snapshot_price).to eq(1)
+      expect(order.purchase_price).to eq(1)
       expect(page).to have_content('1.0')
     end
   end
