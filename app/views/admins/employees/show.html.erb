@@ -8,4 +8,21 @@
   <%= @employee.number_of_available_kudos %>
 </p>
 
+<p>
+  <strong>Earned points:</strong>
+  <%= @employee.earned_points %>
+</p>
+
+<p>
+  <strong>Bought rewards:</strong>
+</p>
+<div class="ms-3">
+<% @employee.orders.each do |order| %>
+    <p class="mb-1"><%= order.reward_snapshot.title %></p>
+    <p class="mb-1">Description: <%= order.reward_snapshot.description %></p>
+    <p class="mb-1">Purchase time: <%= order.created_at.strftime('%d/%m/%Y') %></p>
+    <p class="mb-3">Price: <%= order.purchase_price %></p>
+<% end %>
+</div>
+
 <%= link_to 'Back', admins_employees_path %>
