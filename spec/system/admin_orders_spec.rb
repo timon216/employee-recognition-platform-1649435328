@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin - listing Employees\' Orders', type: :system do
-  before do
-    driven_by(:rack_test)
-  end
-
   let(:admin) { create(:admin) }
   let!(:employee) { create(:employee) }
   let!(:order) { create(:order, employee: employee) }

@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Order - buying a Reward and listing Orders to Employee', type: :system do
-  before do
-    driven_by(:rack_test)
-  end
-
   let(:employee1) { create(:employee) }
   let(:employee2) { create(:employee) }
   let!(:reward1) { create(:reward, price: 1) }

@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin - RUD actions for Employee', type: :system do
-  before do
-    driven_by(:rack_test)
-  end
-
   let(:admin) { create(:admin) }
   let!(:employee) { create(:employee) }
 

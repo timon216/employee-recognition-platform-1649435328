@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Kudos', type: :system do
-  before do
-    driven_by(:rack_test)
-  end
-
   let(:giver) { create(:employee) }
   let!(:receiver) { create(:employee) }
   let!(:company_value) { create(:company_value) }

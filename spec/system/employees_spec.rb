@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Employees', type: :system do
-  before do
-    driven_by(:rack_test)
-  end
-
   context 'when Employee signs up' do
     before do
       visit new_employee_registration_path

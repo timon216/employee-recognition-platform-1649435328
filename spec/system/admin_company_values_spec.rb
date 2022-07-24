@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin - CRUD actions for Company Value', type: :system do
-  before do
-    driven_by(:rack_test)
-  end
-
   let(:admin) { create(:admin) }
   let!(:company_value) { create(:company_value) }
 
