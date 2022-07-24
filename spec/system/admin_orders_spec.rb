@@ -11,14 +11,6 @@ RSpec.describe 'Admin - listing Employees\' Orders', type: :system do
       visit '/admins/pages/dashboard'
     end
 
-    it 'shows Orders of all Employees' do
-      click_link 'Orders'
-      expect(page).to have_content order.reward_snapshot.title
-      expect(page).to have_content order.reward_snapshot.description
-      expect(page).to have_content order.created_at.strftime('%d/%m/%Y')
-      expect(page).to have_content order.purchase_price
-    end
-
     it 'shows Orders of each Employee in their details\' page' do
       click_link 'Employees'
       click_link 'Show details'
