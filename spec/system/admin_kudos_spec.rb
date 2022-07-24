@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin - RD actions for kudo', type: :system do
-  before do
-    driven_by(:rack_test)
-  end
-
   let(:admin) { create(:admin) }
   let(:giver) { create(:employee) }
   let!(:receiver) { create(:employee) }

@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Listing available Rewards to Employees', type: :system do
-  before do
-    driven_by(:rack_test)
-  end
-
   let(:employee) { create(:employee) }
   let!(:reward) { create(:reward) }
 
